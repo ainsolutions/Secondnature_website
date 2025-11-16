@@ -55,7 +55,7 @@ export default function Testimonials() {
       <SectionHeading
         heading="Testimonials"
         desc="What Our Clients Say"
-        bgImage="/public/assets/banner/Banner6.jpg"
+        bgImage="/assets/banner/Banner6.jpg"
       />
 
       <div className="container mx-auto grid md:grid-cols-2 gap-12 mt-10">
@@ -70,17 +70,17 @@ export default function Testimonials() {
             {/* Decorative Image */}
             <div className="relative flex">
               <img
-                src="/public/assets/products/05-Litre Rapseed Oil.png"
+                src="/assets/products/05-Litre Rapseed Oil.png"
                 alt="Rapeseed Oil Bottle"
                 className="w-16 h-16 object-contain drop-shadow-lg animate-bounce-slow mr-[-25px] z-10"
               />
               <img
-                src="/public/assets/products/05-Litre Rapseed Oil.png"
+                src="/assets/products/05-Litre Rapseed Oil.png"
                 alt="Rapeseed Oil Bottle"
                 className="w-14 h-14 object-contain drop-shadow-lg animate-bounce-slow mr-[-30px]"
               />
               <img
-                src="/public/assets/products/05-Litre Rapseed Oil.png"
+                src="/assets/products/05-Litre Rapseed Oil.png"
                 alt="Rapeseed Oil Bottle"
                 className="w-16 h-16 object-contain drop-shadow-lg animate-bounce-slow"
               />
@@ -114,22 +114,22 @@ export default function Testimonials() {
             {/* Decorative Image */}
             <div className="relative flex">
               <img
-                src="/public/assets/products/Full Rapeseed Oil Bottle.png"
+                src="/assets/products/Full Rapeseed Oil Bottle.png"
                 alt="Rapeseed Oil Bottle"
                 className="w-16 h-16 object-contain drop-shadow-lg animate-bounce-slow mr-[-40px]"
               />
               <img
-                src="/public/assets/products/Lemon Rapeseed Oil.png"
+                src="/assets/products/Lemon Rapeseed Oil.png"
                 alt="Rapeseed Oil Bottle"
                 className="w-14 h-14 object-contain drop-shadow-lg animate-bounce-slow mr-[-40px]"
               />
               <img
-                src="/public/assets/products/Basil Oil Bottle.png"
+                src="/assets/products/Basil Oil Bottle.png"
                 alt="Rapeseed Oil Bottle"
                 className="w-16 h-16 object-contain drop-shadow-lg animate-bounce-slow mr-[-40px]"
               />
               <img
-                src="/public/assets/products/Olive Oil Bottle.png"
+                src="/assets/products/Olive Oil Bottle.png"
                 alt="Rapeseed Oil Bottle"
                 className="w-14 h-14 object-contain drop-shadow-lg animate-bounce-slow"
               />

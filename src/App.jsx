@@ -14,7 +14,7 @@ export default function App() {
     <div className='font-body scroll-smooth'>
       <Navbar />
       <main id="home">
-        <VideoBanner videopath="/public/assets/banner/SNO Banner.mp4" />
+        <VideoBanner videopath="/assets/banner/SNO Banner.mp4" />
         <AboutSection />
         <OurStory />
         <OurJourney />

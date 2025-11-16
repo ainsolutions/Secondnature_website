@@ -2,7 +2,7 @@ import React from "react";
 import { Facebook, Instagram, Linkedin } from "lucide-react";
 
 export default function Footer() {
-    const logo = '/public/assets/logos/poweredbylogo.png';
+    const logo = '/assets/logos/poweredbylogo.png';
   return (
     <footer className="relative bg-[--color-primary] text-[--color-bg] py-10">
 

@@ -10,7 +10,7 @@ const ProductsSection = () => {
       <SectionHeading
         heading="Organic Products"
         desc="Explore the range of our organic products"
-        bgImage="/public/assets/banner/Banner3.png"
+        bgImage="/assets/banner/Banner3.png"
       />
       {products.map((product, index) => (
         <ProductCard 

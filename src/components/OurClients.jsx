@@ -3,22 +3,22 @@ import Section from "./ui/Section";
 import TextCard from "./ui/TextCard";
 
 const logos = [
-    "/public/assets/logos/Client1.png",
-    "/public/assets/logos/Client2.png",
-    "/public/assets/logos/Client3.png",
-    "/public/assets/logos/Client4.png",
-    "/public/assets/logos/Client5.png",
-    "/public/assets/logos/Client6.png",
-    "/public/assets/logos/Client7.png",
-    "/public/assets/logos/Client8.png",
-    "/public/assets/logos/Client9.png",
-    "/public/assets/logos/Client10.png",
-    "/public/assets/logos/Client11.png",
-    "/public/assets/logos/Client12.png",
-    "/public/assets/logos/Client13.png",
-    "/public/assets/logos/Client14.png",
-    "/public/assets/logos/Client15.png",
-    "/public/assets/logos/Client16.png",
+    "/assets/logos/Client1.png",
+    "/assets/logos/Client2.png",
+    "/assets/logos/Client3.png",
+    "/assets/logos/Client4.png",
+    "/assets/logos/Client5.png",
+    "/assets/logos/Client6.png",
+    "/assets/logos/Client7.png",
+    "/assets/logos/Client8.png",
+    "/assets/logos/Client9.png",
+    "/assets/logos/Client10.png",
+    "/assets/logos/Client11.png",
+    "/assets/logos/Client12.png",
+    "/assets/logos/Client13.png",
+    "/assets/logos/Client14.png",
+    "/assets/logos/Client15.png",
+    "/assets/logos/Client16.png",
 ];
 
 export default function OurClients() {
@@ -72,7 +72,7 @@ export default function OurClients() {
             <div
                 className="bg-cover flex"
                 style={{
-                    backgroundImage: `url(/public/assets/banner/Banner7.png)`,
+                    backgroundImage: `url(/assets/banner/Banner7.png)`,
                     width: '100%',
                     height: '400px',
                     backgroundPosition: 'center center'

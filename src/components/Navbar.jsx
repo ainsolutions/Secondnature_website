@@ -4,8 +4,8 @@ import OnlineShop from './OnlineShop';
 
 
 const Logo = ({ small }) => {
-  const logo = '/public/assets/logos/logo.png';
-  const logo_ = '/public/assets/logos/logo_.png';
+  const logo = '/assets/logos/logo.png';
+  const logo_ = '/assets/logos/logo_.png';
   return (
     <a href='#home' className='flex items-center gap-3'>
       <img src={logo_} alt='logo' width={small ? "50" : "150"} className='transition-all duration-500' />

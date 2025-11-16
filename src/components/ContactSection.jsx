@@ -47,7 +47,7 @@ export default function ContactSection() {
       <SectionHeading
         heading="Contact Us"
         desc="For wholesale, stockists, or general enquiries email sales@secondnatureoils.com"
-        bgImage="/public/assets/banner/Banner4.jpg"
+        bgImage="/assets/banner/Banner4.jpg"
       />
 
       <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center">
