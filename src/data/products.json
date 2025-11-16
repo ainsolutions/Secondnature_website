@@ -1,0 +1,47 @@
+[
+    {
+        "id": 1,
+        "name": "COLD-PRESSED ORGANIC RAPESEED OIL - 5L cans",
+        "description":
+            "Naturally nutritious with a smooth, mild flavour, our organic cold-pressed rapeseed oil is a wholesome choice for everyday cooking.",
+        "sizes": ["5L cans"],
+        "image": ["/src/assets/products/05-Litre Rapseed Oil.png"],
+        "price": 50.00
+    },
+    {
+        "id": 2,
+        "name": "COLD-PRESSED ORGANIC RAPESEED OIL - 500-ml bottles",
+        "description":
+            "Perfect for frying, baking, or enhancing cold dishes like salads and dressings.",
+        "sizes": ["500-ml bottles"],
+        "image": ["/src/assets/products/Full Rapeseed Oil Bottle.png"],
+        "price": 6.99
+    },
+    {
+        "id": 3,
+        "name": "COLD-PRESSED RAPESEED OIL – LEMON",
+        "description":
+            "Infused with zesty lemon — adds a bright twist to fish, salads, and dressings.",
+        "sizes": ["250-ml bottles"],
+        "image": ["/src/assets/products/Lemon Rapeseed Oil.png"],
+        "price": 4.99
+    },
+    {
+        "id": 4,
+        "name": "COLD-PRESSED RAPESEED OIL – BASIL",
+        "description":
+            "Herbal and aromatic, ideal for pasta, pizza, and Mediterranean dishes.",
+        "sizes": ["250-ml bottles"],
+        "image": ["/src/assets/products/Basil Oil Bottle.png"],
+        "price": 4.99
+    },
+    {
+        "id": 5,
+        "name": "EXTRA VIRGIN OLIVE OIL",
+        "description":
+            "Smooth, rich, and full of character — a kitchen essential for salads and dips.",
+        "sizes": ["500-ml bottles"],
+        "image": ["/src/assets/products/Olive Oil Bottle.png"],
+        "price": 4.99
+    }
+]
