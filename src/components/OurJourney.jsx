@@ -27,7 +27,7 @@ export default function OurJourney() {
       <SectionHeading
         heading="Our Journey"
         desc="2008 onwards..."
-        bgImage="/src/assets/banner/Banner5.jpg"
+        bgImage="/public/assets/banner/Banner5.jpg"
       />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-8">

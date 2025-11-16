@@ -64,7 +64,7 @@ const AboutSection = () => {
       <SectionHeading
         heading="About Us"
         desc="We’re committed to bringing nature’s essence into your life through authentic, organic oils crafted with passion and care."
-        bgImage="/src/assets/banner/Banner1.png"
+        bgImage="/public/assets/banner/Banner1.png"
       />
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-6xl mx-auto justify-center">

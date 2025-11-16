@@ -9,7 +9,7 @@ const OurStory = () => {
             <SectionHeading
                 heading="Our Story"
                 desc="Founded in 2008 on Irish farms, Second Nature Oils began by crafting small batches of cold-pressed, organic rapeseed oil for local customers and farmers’ markets. What started as a humble offering has since grown into a trusted name in premium, sustainably produced oils."
-                bgImage="/src/assets/banner/Banner2.jpg"
+                bgImage="/public/assets/banner/Banner2.jpg"
             />
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-6xl mx-auto justify-center">
