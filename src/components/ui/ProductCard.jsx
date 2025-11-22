@@ -69,7 +69,7 @@ const ProductCard = ({ product }) => {
                         </div>
                     )}
 
-                    <OnlineShop label="Show Now" product={product} />
+                    <OnlineShop label="Order Now" product={product} />
                 </div>
             </div>
         </div>

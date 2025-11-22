@@ -38,8 +38,9 @@ export default function OnlineShop({ label = "Shop Now", product = null }) {
         setSelectedProduct(null);
     };
 
+    const deliveryCharges = 10.00;
     const totalPrice = cart.reduce(
-        (sum, item) => sum + item.price * item.quantity,
+        (sum, item) => sum + item.price * item.quantity + deliveryCharges,
         0
     );
 
@@ -47,7 +48,7 @@ export default function OnlineShop({ label = "Shop Now", product = null }) {
     const handleCheckoutSubmit = async (e) => {
         setLoading(true)
         e.preventDefault();
-        const data = { user: userInfo, cart, total: totalPrice.toFixed(2) };
+        const data = { user: userInfo, cart, total: totalPrice.toFixed(2), deliveryCharges };
         try {
             // Update the API endpoint below to match your Node.js backend port
             const res = await fetch("http://localhost:5000/api/sendOrderEmail", {
@@ -278,6 +279,13 @@ export default function OnlineShop({ label = "Shop Now", product = null }) {
                                             </div>
                                         ))}
 
+                                        <div className="border-[var(--color-secondary)]">
+                                            <p className="text-sm font-semibold text-[var(--color-text)]">
+                                                Standard Delivery: €{deliveryCharges.toFixed(2)}
+                                            </p>
+                                        </div>
+
+
                                         <div className="mt-4 border-t border-[var(--color-secondary)] pt-4 pb-20">
                                             <p className="text-lg font-semibold text-[var(--color-text)]">
                                                 Total: €{totalPrice.toFixed(2)}
@@ -387,6 +395,7 @@ export default function OnlineShop({ label = "Shop Now", product = null }) {
                                                             </li>
                                                         ))}
                                                     </ul>
+                                                    <p className="text-[--color-text] text-sm">Standard Delivery: €{deliveryCharges.toFixed(2)}</p>
                                                     <p className="font-semibold text-[--color-text]">Total: €{totalPrice.toFixed(2)}</p>
                                                 </div>
                                             </div>}

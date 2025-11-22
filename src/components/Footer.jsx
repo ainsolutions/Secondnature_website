@@ -15,7 +15,7 @@ export default function Footer() {
         <div className="space-y-2">
           <h3 className="text-xl font-semibold tracking-wide">Second Nature Oils</h3>
           <p className="text-sm text-[--color-text]/80">
-            Certified organic rapeseed oils from Ireland — sustainably crafted for purity & taste.
+            Certified organic oils from Ireland — sustainably crafted for purity & taste.
           </p>
         </div>
 
@@ -66,10 +66,10 @@ export default function Footer() {
 
       {/* Copyright */}
       <div className="relative z-10 text-center text-xs text-[--color-bg]/80 mt-4">
-        © {new Date().getFullYear()} Second Nature Oils — Certified Organic Rapeseed Oil.
+        © {new Date().getFullYear()} Second Nature Oils
       </div>
       <div className="relative z-10 text-center text-xs text-[--color-bg]/80 mt-4 justify-center flex">
-        <span className="mr-2">Powered by</span><a href="https://www.observeri.com/"  target="_blank" className="flex"><img src={logo} alt="O" className="mt-[-4px] w-10"/><span className="text-lg self-center font-bold text-[--color-bg] logo-glow">bserveri Technologies</span></a>
+        <span className="mr-2">Powered by</span><a href="https://www.observeri.com/"  target="_blank" className="flex"><img src={logo} alt="O" className="mt-[-4px] w-6"/><span className="text-xs self-center font-bold text-[--color-bg] logo-glow">bserveri Technologies</span></a>
       </div>
     </footer>
   );

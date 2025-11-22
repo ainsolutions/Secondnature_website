@@ -17,7 +17,7 @@ const timelineData = [
   { year: 2010, title: "Recognition", desc: "Gained popularity among Craft Butchers", icon: UtensilsCrossed },
   { year: 2014, title: "Expansion", desc: "National Distributors", icon: Truck },
   { year: 2018, title: "Global Reach", desc: "Exported Globally", icon: Globe2 },
-  { year: 2020, title: "Hospitality", desc: "Impressed clients in Hospitality Industry", icon: Building2 },
+  { year: 2020, title: "Further expansion", desc: "Impressed clients in Hospitality Industry", icon: Building2 },
   { year: 2023, title: "Success", desc: "Continued Success...", icon: Award },
 ];
 

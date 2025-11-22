@@ -5,11 +5,11 @@ import OnlineShop from './OnlineShop';
 
 const Logo = ({ small }) => {
   const logo = '/assets/logos/logo.png';
-  const logo_ = '/assets/logos/logo_.png';
+  // const logo_ = '/assets/logos/logo_.png';
   return (
     <a href='#home' className='flex items-center gap-3'>
-      <img src={logo_} alt='logo' width={small ? "50" : "150"} className='transition-all duration-500' />
-      <img src={logo} alt='logo' width={small ? "50" : "150"} className='absolute left-[40px] top-[13px]' />
+      <img src={logo} alt='logo' width={small ? "80" : "150"} className='transition-all duration-500' />
+      {/* <img src={logo} alt='logo' width={small ? "80" : "150"} className='absolute left-[40px] top-[16px]' /> */}
       {/* <span className='font-semibold opacity-0'>Second Nature Oils</span> */}
     </a>
 

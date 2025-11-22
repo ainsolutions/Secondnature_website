@@ -29,7 +29,7 @@ export default function OurClients() {
         const el = marqueeRef.current;
         if (el) {
             const totalWidth = el.scrollWidth / 2; // half (since we duplicate)
-            const speed = totalWidth / 100; // pixels per second
+            const speed = totalWidth / 300; // pixels per second
             setDuration(totalWidth / speed / 10); // tweak divisor to tune speed
         }
     }, []);

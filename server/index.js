@@ -12,7 +12,7 @@ app.use(express.json());
 // ✅ Email sending route
 app.post("/api/sendOrderEmail", async (req, res) => {
   try {
-    const { user, cart, total } = req.body;
+    const { user, cart, total, deliveryCharges } = req.body;
 
     // console.log("📦 Incoming order data:", JSON.stringify(req.body, null, 2));
 
@@ -47,7 +47,8 @@ app.post("/api/sendOrderEmail", async (req, res) => {
           )
           .join("")}
       </ul>
-      <p><b>Total:</b> € ${total}</p>
+      <p><b>Standard Delivery:</b> €${deliveryCharges}</p>
+      <p><b>Total:</b> €${total}</p>
     `;
 
     // ✅ Send email to Sales
@@ -74,6 +75,7 @@ app.post("/api/sendOrderEmail", async (req, res) => {
             )
             .join("")}
         </ul>
+        <p>Standard Delivery: €${deliveryCharges}</p>
         <p><b>Total:</b> €${total}</p>
         <br/>
         <p>Warm regards,<br/>Second Nature Oils Team</p>
