@@ -13,7 +13,7 @@ import Testimonials from './components/Testimonials'
 
 export default function Home() {
   return (
-        <div className='font-body scroll-smooth'>
+    <div className='font-body scroll-smooth'>
       <Navbar />
       <main id="home">
         <VideoBanner videopath="/assets/banner/SNO Banner.mp4" />
