@@ -21,7 +21,7 @@ export default function ContactSection() {
     const data = { user: userInfo };
     try {
       // Update the API endpoint below to match your Node.js backend port
-      const res = await fetch("/api/contactUs", {
+      const res = await fetch("/api/contact-us", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),

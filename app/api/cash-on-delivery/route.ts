@@ -3,7 +3,7 @@ import nodemailer from "nodemailer";
 export async function POST(req) {
   try {
     const body = await req.json();
-    const { user, cart, total, deliveryCharges } = body;
+    const { user, cart, total, deliveryCharges, promoCode } = body;
 
     if (!user || !cart || cart.length === 0) {
       console.error("❌ Invalid order data:", body);
@@ -42,6 +42,7 @@ export async function POST(req) {
 
       <p><b>Standard Delivery:</b> €${deliveryCharges}</p>
       <p><b>Total:</b> €${total}</p>
+      ${promoCode != '' ? `<p><b>Promo Code:</b> ${promoCode}` : `<p></p>`}
     `;
 
     // Send email to sales team
@@ -71,6 +72,9 @@ export async function POST(req) {
 
         <p>Standard Delivery: €${deliveryCharges}</p>
         <p><b>Total:</b> €${total}</p>
+        ${promoCode != '' ? `<p><b>Promo Code:</b> ${promoCode}</p>` : `<p></p>`}
+        ${promoCode != '' ? `<p><b>Note:</b> We verify promo codes manually after receiving your order by email. If the code is valid, your discount will be added before final payment.</p>`: `<p></p>`}
+
 
         <p><br/>Regards,<br/>Second Nature Oils Team</p>
       `;

@@ -14,7 +14,12 @@ export default function OnlineShop({ label = "Shop Now", product = null }) {
     const [showCheckout, setShowCheckout] = useState(false);
     const [showThankyou, setShowThankyou] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [paymentMethod, setPaymentMethod] = useState("")
+    const [paymentMethod, setPaymentMethod] = useState("");
+    const [promoCode, setPromoCode] = useState("");
+    const [validatingPromo, setvalidatingPromo] = useState(false);
+    const [message, setMessage] = useState("");
+    const [isValid, setIsValid] = useState(false);
+    const [discountedTotal, setDiscountedTotal] = useState(0);
 
     const [userInfo, setUserInfo] = useState({
         name: "",
@@ -45,14 +50,12 @@ export default function OnlineShop({ label = "Shop Now", product = null }) {
         0
     );
 
-    // ✅ Checkout & Send Order to Node.js backend
     const handleCheckoutSubmit = async (e) => {
         setLoading(true)
         e.preventDefault();
-        const data = { user: userInfo, cart, total: totalPrice.toFixed(2), deliveryCharges };
+        const data = { user: userInfo, cart, total: totalPrice.toFixed(2), deliveryCharges, promoCode };
         try {
-            // Update the API endpoint below to match your Node.js backend port
-            const res = await fetch("/api/cashOnDelivery", {
+            const res = await fetch("/api/cash-on-delivery", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(data),
@@ -77,43 +80,73 @@ export default function OnlineShop({ label = "Shop Now", product = null }) {
     };
 
     const handleStripeCheckout = async () => {
-        const res = await fetch("/api/create-checkout-session", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                cart,
-                deliveryCharge: deliveryCharges
-            })
-        });
-
-        const data = await res.json();
-
-        if (data.url) {
-            window.location.href = data.url; // redirect to Stripe
-        }
-        };
-
-    
-
-
-    const handleStripeCheckout_ = async () => {
         try {
             const res = await fetch("/api/create-checkout-session", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ cart, deliveryCharge: deliveryCharges }),
+                body: JSON.stringify({
+                    cart,
+                    deliveryCharge: deliveryCharges,
+                    promoCode
+                })
             });
 
             const data = await res.json();
 
             if (data.url) {
                 window.location.href = data.url; // redirect to Stripe
+            } else if (data.promo == 'invalid') {
+                alert('You have entered an invalid Promo Code.');
             }
         } catch (err) {
             console.error("Stripe checkout error:", err);
             alert("Something went wrong.");
         }
     };
+
+    const onApply = (discount) => {
+        let newTotal = totalPrice;
+
+        if (discount.type === "percent") {
+            newTotal = totalPrice - (totalPrice * (discount.discount / 100));
+        }
+
+        if (discount.type === "fixed") {
+            newTotal = totalPrice - discount.discount;
+        }
+
+        if (newTotal < 0) newTotal = 0; // safety
+
+        setDiscountedTotal(newTotal);
+    };
+
+    const handleApply = async () => {
+        if (promoCode == "") {
+            setMessage("Please enter promo code.")
+            return;
+        };
+
+        setvalidatingPromo(true);
+        setMessage("");
+
+        const res = await fetch("/api/validate-promo", {
+            method: "POST",
+            body: JSON.stringify({ promoCode: promoCode }),
+        });
+
+        const data = await res.json();
+        setvalidatingPromo(false);
+
+        if (res.ok) {
+            setMessage("Promo applied successfully!");
+            onApply(data);
+            setIsValid(true);
+        } else {
+            setMessage(data.error || "Invalid promo code");
+            setIsValid(false);
+        }
+    };
+
 
 
     return (
@@ -284,7 +317,14 @@ export default function OnlineShop({ label = "Shop Now", product = null }) {
                                                 Your Cart
                                             </h3>
                                             <button
-                                                onClick={() => setShowCart(false)}
+                                                onClick={() => {
+                                                    setShowCart(false)
+                                                    setPaymentMethod("")
+                                                    setMessage("")
+                                                    setPromoCode("")
+                                                    setDiscountedTotal(0)
+                                                    setIsValid(false)
+                                                }}
                                                 className="text-[var(--color-primary)] hover:text-[var(--color-accent)]"
                                             >
                                                 <X />
@@ -327,13 +367,46 @@ export default function OnlineShop({ label = "Shop Now", product = null }) {
                                         </div>
 
 
-                                        <div className="mt-4 border-t border-[var(--color-secondary)] pt-4 pb-20">
+                                        <div className="mt-4 border-t border-[var(--color-secondary)] pt-4">
                                             <p className="text-lg font-semibold text-[var(--color-text)]">
                                                 Total: €{totalPrice.toFixed(2)}
                                             </p>
                                         </div>
 
+                                        <div className="mb-4 pt-4">
+                                            <div>
+                                                <div className="flex items-center gap-3 mt-4">
+                                                    <input
+                                                        type="text"
+                                                        placeholder="Enter promo code"
+                                                        className="w-full p-3 rounded-lg border border-[var(--color-secondary)] bg-transparent text-[var(--color-text)] focus:outline-none"
+                                                        value={promoCode}
+                                                        onChange={(e) => setPromoCode(e.target.value)}
+                                                    />
 
+                                                    <button
+                                                        onClick={() => handleApply()}
+                                                        disabled={validatingPromo}
+                                                        className="p-3 bg-[var(--color-primary)] text-[var(--color-bg)] rounded-full font-medium hover:bg-[var(--color-accent)] shadow-lg transition"
+                                                    >
+                                                        {validatingPromo ? "Checking..." : "Apply"}
+                                                    </button>
+
+                                                </div>
+
+                                                {message && (
+                                                    <p className={`text-sm ml-2 ${isValid ? 'text-[var(--color-accent)]' : 'text-red-500'}`}>
+                                                        {message}
+                                                    </p>
+                                                )}
+
+                                                {isValid && discountedTotal > 0 && <div className="mt-4 pt-4">
+                                                    <p className="text-lg font-semibold text-[var(--color-text)]">
+                                                        Discounted Total: €{discountedTotal.toFixed(2)}
+                                                    </p>
+                                                </div>}
+                                            </div>
+                                        </div>
 
                                         <div className="">
                                             <p className="text-lg font-semibold text-[var(--color-text)]">
@@ -373,7 +446,7 @@ export default function OnlineShop({ label = "Shop Now", product = null }) {
                                         {paymentMethod === 'cod' &&
                                             <button
                                                 onClick={() => setShowCheckout(true)}
-                                                className=" w-full mt-5 p-3 bg-[var(--color-primary)] text-[var(--color-bg)] rounded-full font-medium hover:bg-[var(--color-accent)] shadow-lg transition mb-4"
+                                                className="w-full mt-5 p-3 bg-[var(--color-primary)] text-[var(--color-bg)] rounded-full font-medium hover:bg-[var(--color-accent)] shadow-lg transition mb-4"
                                             >
                                                 Proceed to Checkout
                                             </button>}
@@ -406,7 +479,14 @@ export default function OnlineShop({ label = "Shop Now", product = null }) {
                                             </h3>
                                             {!loading &&
                                                 <button
-                                                    onClick={() => setShowCheckout(false)}
+                                                    onClick={() => {
+                                                        setShowCheckout(false)
+                                                        setPaymentMethod("")
+                                                        setMessage("")
+                                                        setPromoCode("")
+                                                        setDiscountedTotal(0)
+                                                        setIsValid(false)
+                                                    }}
                                                     className="text-[var(--color-primary)] hover:text-[var(--color-accent)]"
                                                 >
                                                     <X />
@@ -496,6 +576,8 @@ export default function OnlineShop({ label = "Shop Now", product = null }) {
                                                 <p className="text-[var(--color-text)] mb-6">
                                                     A confirmation email has been sent to your email address.
                                                 </p>
+                                                {isValid && discountedTotal > 0 && 
+                                                <p className="text-[var(--color-text)]/50 text-sm"><b>Note:</b> We verify promo codes manually after receiving your order by email. If the code is valid, your discount will be added before final payment.</p>}
                                                 {/* <div className="text-left border-t pt-4">
                                                     <h3 className="font-semibold text-[var(--color-text)] mb-2">Order Summary:</h3>
                                                     <ul className="space-y-1 mb-4 text-[var(--color-text)]">

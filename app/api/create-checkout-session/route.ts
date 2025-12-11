@@ -5,7 +5,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 export async function POST(request) {
   try {
     const body = await request.json();
-    const { cart, deliveryCharge } = body;
+    const { cart, deliveryCharge, promoCode } = body;
 
     if (!cart || cart.length === 0) {
       return Response.json({ error: "Cart is empty" }, { status: 400 });
@@ -17,12 +17,11 @@ export async function POST(request) {
         product_data: {
           name: item.name,
         },
-        unit_amount: Math.round(item.price * 100), // convert to cents
+        unit_amount: Math.round(item.price * 100),
       },
       quantity: item.quantity,
     }));
 
-    // Add delivery charge if present
     if (deliveryCharge && deliveryCharge > 0) {
       lineItems.push({
         price_data: {
@@ -36,10 +35,29 @@ export async function POST(request) {
       });
     }
 
+    let discounts = [];
+    if (promoCode != '') {
+      const promo = await stripe.promotionCodes.list({
+        code: promoCode,
+        active: true,
+        limit: 1,
+      });
+
+      if (promo.data.length === 0) {
+        return Response.json(
+          { error: "Invalid or expired promo code", promo: 'invalid' },
+          { status: 400 }
+        );
+      }
+
+      discounts = [{ promotion_code: promo.data[0].id }];
+    }
+
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       line_items: lineItems,
       mode: "payment",
+      discounts,
       success_url: `${process.env.CLIENT_URL}/payment-success`,
       cancel_url: `${process.env.CLIENT_URL}/payment-cancelled`,
     });
