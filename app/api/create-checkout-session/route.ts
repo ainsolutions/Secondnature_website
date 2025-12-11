@@ -1,8 +1,8 @@
 import Stripe from "stripe";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "");
 
-export async function POST(request) {
+export async function POST(request: any) {
   try {
     const body = await request.json();
     const { cart, deliveryCharge, promoCode } = body;
@@ -11,7 +11,7 @@ export async function POST(request) {
       return Response.json({ error: "Cart is empty" }, { status: 400 });
     }
 
-    const lineItems = cart.map((item) => ({
+    const lineItems = cart.map((item: any) => ({
       price_data: {
         currency: "eur",
         product_data: {
@@ -19,7 +19,7 @@ export async function POST(request) {
         },
         unit_amount: Math.round(item.price * 100),
       },
-      quantity: item.quantity,
+      quantity: item.quantity
     }));
 
     if (deliveryCharge && deliveryCharge > 0) {
@@ -35,7 +35,7 @@ export async function POST(request) {
       });
     }
 
-    let discounts = [];
+    let discounts:any = [];
     if (promoCode != '') {
       const promo = await stripe.promotionCodes.list({
         code: promoCode,
@@ -63,7 +63,7 @@ export async function POST(request) {
     });
 
     return Response.json({ url: session.url });
-  } catch (err) {
+  } catch (err: any) {
     console.error("Stripe error:", err);
     return Response.json({ error: err.message }, { status: 500 });
   }

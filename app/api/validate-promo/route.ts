@@ -1,12 +1,12 @@
 import Stripe from "stripe";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "");
 
-export async function POST(request) {
+export async function POST(request: any) {
   try {
     const { promoCode } = await request.json();
 
-    const promo = await stripe.promotionCodes.list({
+    const promo:any = await stripe.promotionCodes.list({
       code: promoCode,
       active: true,
       limit: 1,
@@ -25,7 +25,7 @@ export async function POST(request) {
       type: promo.data[0].coupon.percent_off ? "percent" : "fixed",
     });
     
-  } catch (error) {
+  } catch (error: any) {
     return Response.json({ error: error.message }, { status: 500 });
   }
 }

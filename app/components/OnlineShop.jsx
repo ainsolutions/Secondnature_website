@@ -147,7 +147,16 @@ export default function OnlineShop({ label = "Shop Now", product = null }) {
         }
     };
 
-
+    const onCloseCart = () => {
+        setShowCart(false)
+        setShowCheckout(false)
+        setPaymentMethod("")
+        setMessage("")
+        setPromoCode("")
+        setDiscountedTotal(0)
+        setIsValid(false)
+        setUserInfo({})
+    }
 
     return (
         <>
@@ -317,14 +326,7 @@ export default function OnlineShop({ label = "Shop Now", product = null }) {
                                                 Your Cart
                                             </h3>
                                             <button
-                                                onClick={() => {
-                                                    setShowCart(false)
-                                                    setPaymentMethod("")
-                                                    setMessage("")
-                                                    setPromoCode("")
-                                                    setDiscountedTotal(0)
-                                                    setIsValid(false)
-                                                }}
+                                                onClick={() => onCloseCart()}
                                                 className="text-[var(--color-primary)] hover:text-[var(--color-accent)]"
                                             >
                                                 <X />
@@ -479,14 +481,7 @@ export default function OnlineShop({ label = "Shop Now", product = null }) {
                                             </h3>
                                             {!loading &&
                                                 <button
-                                                    onClick={() => {
-                                                        setShowCheckout(false)
-                                                        setPaymentMethod("")
-                                                        setMessage("")
-                                                        setPromoCode("")
-                                                        setDiscountedTotal(0)
-                                                        setIsValid(false)
-                                                    }}
+                                                    onClick={() => onCloseCart()}
                                                     className="text-[var(--color-primary)] hover:text-[var(--color-accent)]"
                                                 >
                                                     <X />
@@ -564,7 +559,14 @@ export default function OnlineShop({ label = "Shop Now", product = null }) {
                                                         ))}
                                                     </ul>
                                                     <p className="text-[var(--color-text)] text-sm">Standard Delivery: €{deliveryCharges.toFixed(2)}</p>
+
                                                     <p className="font-semibold text-[var(--color-text)]">Total: €{totalPrice.toFixed(2)}</p>
+                                                    {isValid && discountedTotal > 0 &&
+                                                        <div>
+                                                            <p className="font-semibold text-[var(--color-text)]">Discounted Total: €{discountedTotal.toFixed(2)}</p>
+                                                            <p className="text-[var(--color-text)]/50 text-sm"><b>Note:</b> We verify promo codes manually after receiving your order by email. If the code is valid, your discount will be added before final payment.</p>
+                                                        </div>
+                                                    }
                                                 </div>
                                             </div>}
 
@@ -576,8 +578,8 @@ export default function OnlineShop({ label = "Shop Now", product = null }) {
                                                 <p className="text-[var(--color-text)] mb-6">
                                                     A confirmation email has been sent to your email address.
                                                 </p>
-                                                {isValid && discountedTotal > 0 && 
-                                                <p className="text-[var(--color-text)]/50 text-sm"><b>Note:</b> We verify promo codes manually after receiving your order by email. If the code is valid, your discount will be added before final payment.</p>}
+                                                {isValid && discountedTotal > 0 &&
+                                                    <p className="text-[var(--color-text)]/50 text-sm"><b>Note:</b> We verify promo codes manually after receiving your order by email. If the code is valid, your discount will be added before final payment.</p>}
                                                 {/* <div className="text-left border-t pt-4">
                                                     <h3 className="font-semibold text-[var(--color-text)] mb-2">Order Summary:</h3>
                                                     <ul className="space-y-1 mb-4 text-[var(--color-text)]">
