@@ -1,7 +1,11 @@
 import FadeInView from "./FadeInView";
 import OnlineShop from "../OnlineShop";
+import OrderDetails from "./OrderDetails";
 
 const ProductCard = ({ product }) => {
+
+    let ENABLE_ONLINE_SHOP = false;
+
     return (
         <div className="max-w-4xl mx-auto px-4 py-12">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -69,7 +73,7 @@ const ProductCard = ({ product }) => {
                         </div>
                     )}
 
-                    <OnlineShop label="Order Now" product={product} />
+                    {ENABLE_ONLINE_SHOP ? <OnlineShop label="Order Now" product={product} /> : <OrderDetails label="Order Now" />}
                 </div>
             </div>
         </div>

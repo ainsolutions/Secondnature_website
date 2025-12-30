@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Menu, X } from 'lucide-react'
 import OnlineShop from './OnlineShop';
+import OrderDetails from './ui/OrderDetails';
 
 
 const Logo = ({ small }) => {
@@ -30,9 +31,9 @@ export default function Navbar() {
     { id: 'contact', label: 'Contact' }
   ]
 
+let ENABLE_ONLINE_SHOP = false;
 
-
-  useEffect(() => {
+useEffect(() => {
     const handleScroll = () => {
       // Compare scroll position with window height
       if (window.scrollY > window.innerHeight) {
@@ -66,7 +67,7 @@ export default function Navbar() {
           {links.map(l => l.id != "shop" ? <li key={l.id}><a href={`#${l.id}`} className='hover:opacity-75'>{l.label}</a></li> :
 
             <li key={l.id}>
-              <OnlineShop label={l.label} />
+              {ENABLE_ONLINE_SHOP ? <OnlineShop label={l.label} /> : <OrderDetails label="Order Now" />}
             </li>)}
         </ul>
       </div>
@@ -75,7 +76,7 @@ export default function Navbar() {
         {links.map(l => l.id != "shop" ? <li key={l.id}><a href={`#${l.id}`} className='hover:opacity-75'>{l.label}</a></li> :
 
           <li key={l.id}>
-            <OnlineShop label={l.label} />
+            {ENABLE_ONLINE_SHOP ? <OnlineShop label={l.label} /> : <OrderDetails label="Order Now" />}
           </li>)}
 
 
